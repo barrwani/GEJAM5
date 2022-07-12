@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Partner.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/PartnerFSM.gd" type="Script" id=2]
+[ext_resource path="res://1.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 36.2809
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 21.6406, 8.16953 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Partner" type="KinematicBody2D" groups=[
+"partner",
+]]
+position = Vector2( -20, 18 )
+scale = Vector2( 0.8, 0.8 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+rotation = 1.5708
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="StateMachine"]
+position = Vector2( 0.643089, -20.6838 )
+frames = SubResource( 3 )
+
+[node name="Label" type="Label" parent="StateMachine"]
+margin_left = -21.7881
+margin_top = -46.1126
+margin_right = 18.2118
+margin_bottom = -32.1126
+text = "NULL"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

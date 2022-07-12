@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/PlayerFSM.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://1.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 21.4843 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.0197368, 1 )
+colors = PoolColorArray( 0.584314, 0.498039, 0.027451, 0.505882, 0.0627451, 0.772549, 0.67451, 0.403922 )
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="StateMachine"]
+position = Vector2( 0.749157, -20.6017 )
+frames = SubResource( 2 )
+
+[node name="Label" type="Label" parent="StateMachine"]
+margin_left = -22.3636
+margin_top = -44.7272
+margin_right = 17.6364
+margin_bottom = -30.7272
+text = "NULL"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="StateMachine"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="throwtimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 7.0
+gradient = SubResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( -17.6866, -5.00565 )
+
+[node name="pickuptimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="StateMachine/Timer" to="StateMachine" method="_on_Timer_timeout"]
+[connection signal="timeout" from="throwtimer" to="." method="_on_throwtimer_timeout"]
+[connection signal="timeout" from="pickuptimer" to="." method="_on_pickuptimer_timeout"]
