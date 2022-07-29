@@ -13,6 +13,10 @@ func _ready():
 func _state_logic(delta):
 	parent._apply_movement()
 	parent._apply_gravity(delta)
+	if [states.attached].has(state):
+		$AnimatedSprite.set_deferred("visible", false)
+	else:
+		$AnimatedSprite.set_deferred("visible", true)
 
 
 func _get_transition(delta):
@@ -39,10 +43,16 @@ func _get_transition(delta):
 func _enter_state(new_state, old_state):
 	match new_state:
 		states.independent:
+			$Throw.stop()
+			$AnimatedSprite.play("Land")
 			$Label.text = "Independent"
 		states.attached:
 			$Label.text = "Attached"
 		states.firing:
+			$AnimatedSprite.play("Shoot")
+			$Slingshot.play()
 			$Label.text = "firing"
 		states.in_air:
+			$Throw.play()
+			$AnimatedSprite.play("Launch")
 			$Label.text = "thrown"

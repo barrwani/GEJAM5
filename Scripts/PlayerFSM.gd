@@ -2,11 +2,14 @@ extends "res://Scripts/StateMachine.gd"
 
 var add = false
 var hold = false
+var justpicked = false
+
 func _ready():
 	add_state("idle")
 	add_state("run")
 	add_state("jump")
 	add_state("fall")
+	add_state("charging")
 	add_state("throw")
 	add_state("pickup")
 	add_state("dead")
@@ -14,11 +17,13 @@ func _ready():
 
 
 func _input(event):
-	if [states.idle, states.run].has(state):
+	if [states.idle, states.run, states.charging].has(state):
 		if event.is_action_pressed("jump") && ! parent.jumping:
 			parent.jump()
 			parent.jumping = true
-	if [states.idle, states.run, states.fall, states.jump].has(state):
+	if event.is_action_pressed("R"):
+		get_tree().reload_current_scene()
+	if [states.idle, states.run, states.fall, states.jump, states.charging].has(state):
 		if event.is_action_pressed("throw") && parent.connected:
 			$Timer.start()
 			parent.holding = true
@@ -30,7 +35,7 @@ func _input(event):
 			parent.line.hide()
 			add = false
 			parent.throw()
-			parent.throwspeed = 200
+			parent.throwspeed = 300
 			parent.holding = false
 
 
@@ -45,6 +50,10 @@ func _get_transition(delta):
 		states.idle:
 			if parent.dead:
 				return states.dead
+			elif hold:
+				return states.charging
+			elif parent.justpicked:
+				return states.pickup
 			elif parent.throwing:
 				return states.throw
 			elif ! parent.is_on_floor():
@@ -59,6 +68,10 @@ func _get_transition(delta):
 		states.run:
 			if parent.dead:
 				return states.dead
+			elif hold:
+				return states.charging
+			elif parent.justpicked:
+				return states.pickup
 			elif parent.throwing:
 				return states.throw
 			elif !parent.is_on_floor():
@@ -73,9 +86,18 @@ func _get_transition(delta):
 		states.throw:
 			if !parent.throwing:
 				return states.idle
+		states.charging:
+			if parent.dead:
+				return states.dead
+			elif !hold:
+				return states.throw
 		states.jump:
 			if parent.dead:
 				return states.dead
+			elif hold:
+				return states.charging
+			elif parent.justpicked:
+				return states.pickup
 			elif parent.velocity.y >= 0 and ! parent.is_on_floor():
 				return states.fall
 			elif parent.is_on_floor():
@@ -84,30 +106,65 @@ func _get_transition(delta):
 		states.fall:
 			if parent.dead:
 				return states.dead
+			elif hold:
+				return states.charging
+			elif parent.justpicked:
+				return states.pickup
 			elif parent.is_on_floor():
 				parent.jumping = false
 				return states.idle
+		states.pickup:
+			return states.idle
 		states.dead:
 			if !parent.dead:
 				return states.idle
 
 func _enter_state(new_state, old_state):
 	match new_state:
+		states.pickup:
+			$Attached.play()
+			$AnimatedSprite.play("2Idle")
 		states.idle:
+			$Walk.stop()
 			$Label.text = "Idle"
-			#$AnimatedSprite.play("Idle")
+			if ! parent.connected:
+				$AnimatedSprite.play("Idle")
+			else:
+				$AnimatedSprite.play("2Idle")
 		states.run:
+			$Walk.play()
 			$Label.text = "Run"
-			#$AnimatedSprite.play("Run")
+			if ! parent.connected:
+				$AnimatedSprite.play("Run")
+			else:
+				$AnimatedSprite.play("2Run")
 		states.jump:
+			$Walk.stop()
+			$Jump.play()
 			$Label.text = "Jump"
-			#$AnimatedSprite.play("Jump")
+			if ! parent.connected:
+				$AnimatedSprite.play("Jump")
+			else:
+				$AnimatedSprite.play("2Jump")
 		states.dead:
+			$Walk.stop()
+			$Detected.play()
 			$Label.text = "Dead"
 		states.fall:
+			$Walk.stop()
 			$Label.text = "Fall"
-			#$AnimatedSprite.play("Fall")
+			if ! parent.connected:
+				$AnimatedSprite.play("Jump")
+			else:
+				
+				$AnimatedSprite.play("2Fall")
+		states.charging:
+			$Walk.stop()
+			$AnimatedSprite.play("Charge")
+			$Charge.play()
 		states.throw:
+			$Walk.stop()
+			$Charge.stop()
 			$Label.text = "Throw"
 
 
@@ -115,8 +172,8 @@ func _exit_state(old_state, new_state):
 	pass
 
 func _process(delta):
-	if add && parent.throwspeed <400:
-		parent.throwspeed += 10
+	if add && parent.throwspeed <900:
+		parent.throwspeed += 15
 
 
 

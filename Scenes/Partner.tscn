@@ -1,34 +1,64 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Partner.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/PartnerFSM.gd" type="Script" id=2]
-[ext_resource path="res://1.png" type="Texture" id=3]
+[ext_resource path="res://cannonball.png" type="Texture" id=3]
+[ext_resource path="res://range.png" type="Texture" id=4]
+[ext_resource path="res://SFX/Slingshot.wav" type="AudioStream" id=5]
+[ext_resource path="res://SFX/Land.wav" type="AudioStream" id=6]
+[ext_resource path="res://SFX/Throw.wav" type="AudioStream" id=7]
+[ext_resource path="res://broshoot2.png" type="Texture" id=8]
+[ext_resource path="res://broshoot.png" type="Texture" id=9]
+[ext_resource path="res://brotheridle.png" type="Texture" id=17]
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 36.2809
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 21.6406, 8.16953 )
+extents = Vector2( 68.8462, 24.0385 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [  ],
 "loop": true,
 "name": "default",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "Shoot",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "moving",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "Land",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "Launch",
+"speed": 14.0
 } ]
 
-[node name="Partner" type="KinematicBody2D" groups=[
-"partner",
-]]
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 128.654, 231 )
+
+[node name="Partner" type="KinematicBody2D" groups=["partner"]]
 position = Vector2( -20, 18 )
-scale = Vector2( 0.8, 0.8 )
+scale = Vector2( 1.3, 1.3 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 rotation = 1.5708
+scale = Vector2( 2, 2 )
 collision_layer = 3
 collision_mask = 3
 
@@ -36,27 +66,65 @@ collision_mask = 3
 shape = SubResource( 4 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( -0.961575, 2.6923 )
 rotation = 1.5708
 shape = SubResource( 2 )
+disabled = true
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="StateMachine"]
-position = Vector2( 0.643089, -20.6838 )
+position = Vector2( 6.15385, -14.6154 )
+scale = Vector2( 0.12, 0.11 )
 frames = SubResource( 3 )
+animation = "moving"
+playing = true
 
 [node name="Label" type="Label" parent="StateMachine"]
-margin_left = -21.7881
-margin_top = -46.1126
-margin_right = 18.2118
-margin_bottom = -32.1126
+margin_left = -18.0
+margin_top = 23.0
+margin_right = 21.9999
+margin_bottom = 37.0
 text = "NULL"
 align = 1
 valign = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="Land" type="AudioStreamPlayer" parent="StateMachine"]
+stream = ExtResource( 6 )
+volume_db = -8.252
+bus = "SFX"
+
+[node name="Throw" type="AudioStreamPlayer" parent="StateMachine"]
+stream = ExtResource( 7 )
+volume_db = -10.0
+bus = "SFX"
+
+[node name="Slingshot" type="AudioStreamPlayer" parent="StateMachine"]
+stream = ExtResource( 5 )
+volume_db = -10.0
+bus = "SFX"
+
+[node name="AbilityArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AbilityArea"]
+visible = false
+position = Vector2( -4.00001, -53.6539 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="Range" type="Sprite" parent="AbilityArea"]
+visible = false
+position = Vector2( -3.84615, -53.0769 )
+scale = Vector2( 0.36, 0.36 )
+texture = ExtResource( 4 )
+
+[node name="firingtimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="area_entered" from="AbilityArea" to="." method="_on_AbilityArea_area_entered"]
+[connection signal="body_entered" from="AbilityArea" to="." method="_on_AbilityArea_body_entered"]
+[connection signal="timeout" from="firingtimer" to="." method="_on_firingtimer_timeout"]
