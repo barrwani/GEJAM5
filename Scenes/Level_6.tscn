@@ -1,0 +1,272 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Partner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://poster.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://platform.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Platform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://door.png" type="Texture" id=7]
+[ext_resource path="res://Scripts/Door.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/ElevatorPlat.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/MovingWall.tscn" type="PackedScene" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 323.9, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 57, 156.75 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "doorunlocked"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Door:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.360784, 0.360784, 0.360784, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 74.3, 10 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "elevate"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ElevatorPlat:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 400 ) ]
+}
+
+[node name="World" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [ -1318.0 ]
+}
+
+[node name="Poster" type="Sprite" parent="."]
+position = Vector2( -589.865, 182.897 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster8" type="Sprite" parent="."]
+position = Vector2( 1236.57, 206.87 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster2" type="Sprite" parent="."]
+position = Vector2( -495.865, -253.103 )
+rotation = 0.176426
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster3" type="Sprite" parent="."]
+position = Vector2( -495.865, -253.103 )
+rotation = -1.44585
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster4" type="Sprite" parent="."]
+position = Vector2( -495.865, -253.103 )
+rotation = -0.739574
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster5" type="Sprite" parent="."]
+position = Vector2( -495.865, -253.103 )
+rotation = 1.32089
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster9" type="Sprite" parent="."]
+position = Vector2( 1138.13, -169.103 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 3 )
+
+[node name="Poster6" type="Sprite" parent="."]
+position = Vector2( 306.135, 204.897 )
+rotation = 0.271703
+scale = Vector2( 0.327627, 0.21619 )
+texture = ExtResource( 3 )
+
+[node name="Poster7" type="Sprite" parent="."]
+position = Vector2( 578.135, 84.897 )
+rotation = -0.244529
+scale = Vector2( 0.327627, 0.21619 )
+texture = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -37.1801, -407.219 )
+
+[node name="Partner" parent="Player" instance=ExtResource( 2 )]
+position = Vector2( -10.5883, -67.0588 )
+
+[node name="Floor" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+position = Vector2( -637, 538 )
+scale = Vector2( 5, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2( 190.9, -1.12246 )
+shape = SubResource( 1 )
+
+[node name="Platform2" type="Sprite" parent="Floor"]
+modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
+position = Vector2( 199.2, 0.600159 )
+scale = Vector2( 0.6768, 0.133 )
+texture = ExtResource( 5 )
+
+[node name="Floor2" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+position = Vector2( 1618, 471 )
+rotation = -1.5708
+scale = Vector2( 5, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2( 190.9, -1.12246 )
+shape = SubResource( 1 )
+
+[node name="Platform2" type="Sprite" parent="Floor2"]
+modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
+position = Vector2( 199.2, 0.600159 )
+scale = Vector2( 0.6768, 0.133 )
+texture = ExtResource( 5 )
+
+[node name="Floor3" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+position = Vector2( -1348, -1578 )
+rotation = 1.5708
+scale = Vector2( 5, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
+position = Vector2( 190.9, -1.12246 )
+shape = SubResource( 1 )
+
+[node name="Platform2" type="Sprite" parent="Floor3"]
+modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
+position = Vector2( 199.2, 0.600159 )
+scale = Vector2( 0.6768, 0.133 )
+texture = ExtResource( 5 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform2" parent="Platforms" instance=ExtResource( 6 )]
+position = Vector2( 972, -32.9999 )
+
+[node name="Platform3" parent="Platforms" instance=ExtResource( 6 )]
+position = Vector2( 2839.12, -57.2246 )
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( 12.1047, 810.287 )
+script = ExtResource( 8 )
+next_scene = "res://Scenes/Menu.tscn"
+total_enemies = 3
+
+[node name="Door" type="Sprite" parent="Door"]
+modulate = Color( 0.360784, 0.360784, 0.360784, 1 )
+position = Vector2( -1211, -479 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+visible = false
+position = Vector2( -1212, -495.25 )
+shape = SubResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="Door"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
+anims/doorunlocked = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.1 )
+limit_left = -1320
+limit_bottom = 500
+
+[node name="Button" parent="." instance=ExtResource( 4 )]
+position = Vector2( -1168, -111 )
+
+[node name="Button4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1434.69, -151.56 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 9 )]
+position = Vector2( -1004.36, -408.322 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 9 )]
+position = Vector2( -999.511, 159.181 )
+
+[node name="MovingWall" parent="." instance=ExtResource( 11 )]
+position = Vector2( -397.953, 219.358 )
+
+[node name="ElevatorPlat" type="Node2D" parent="."]
+position = Vector2( 125.617, -247.248 )
+script = ExtResource( 10 )
+
+[node name="ElevatorPlat" type="StaticBody2D" parent="ElevatorPlat" groups=[
+"platform",
+]]
+scale = Vector2( 5, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="Platform" type="Sprite" parent="ElevatorPlat/ElevatorPlat"]
+position = Vector2( 1.79593, 0 )
+scale = Vector2( 0.149975, 0.133 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElevatorPlat/ElevatorPlat"]
+shape = SubResource( 4 )
+
+[node name="Button5" parent="ElevatorPlat/ElevatorPlat" instance=ExtResource( 4 )]
+position = Vector2( -62.4726, -18.28 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="Button6" parent="ElevatorPlat/ElevatorPlat" instance=ExtResource( 4 )]
+position = Vector2( 61.5405, -16.4982 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ElevatorPlat"]
+anims/elevate = SubResource( 5 )
+
+[node name="Enemy" parent="." instance=ExtResource( 9 )]
+position = Vector2( 682.586, -420.001 )
+
+[connection signal="fliph" from="Player" to="Player/Partner" method="_on_Player_fliph"]
+[connection signal="moving" from="Player" to="Player/Partner" method="_on_Player_moving"]
+[connection signal="stopped" from="Player" to="Player/Partner" method="_on_Player_stopped"]
+[connection signal="throw" from="Player" to="Player/Partner" method="_on_Player_throw"]
+[connection signal="body_entered" from="Player/Partner/Area2D" to="Player" method="_on_Partner_body_entered"]
+[connection signal="body_entered" from="Door" to="Door" method="_on_Door_body_entered"]
+[connection signal="buttonpressed" from="Button" to="MovingWall" method="_on_Button_buttonpressed"]
+[connection signal="unpress" from="Button" to="Button4" method="unpress"]
+[connection signal="buttonpressed" from="Button4" to="MovingWall" method="_on_Button_buttonpressed"]
+[connection signal="unpress" from="Button4" to="Button" method="unpress"]
+[connection signal="buttonpressed" from="ElevatorPlat/ElevatorPlat/Button5" to="ElevatorPlat" method="_on_Button_buttonpressed"]
+[connection signal="unpress" from="ElevatorPlat/ElevatorPlat/Button5" to="ElevatorPlat/ElevatorPlat/Button6" method="unpress"]
+[connection signal="buttonpressed" from="ElevatorPlat/ElevatorPlat/Button6" to="ElevatorPlat" method="_on_Button_buttonpressed"]
+[connection signal="unpress" from="ElevatorPlat/ElevatorPlat/Button6" to="ElevatorPlat/ElevatorPlat/Button5" method="unpress"]
+
+[editable path="Player/Partner"]

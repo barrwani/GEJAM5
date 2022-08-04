@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Partner.tscn" type="PackedScene" id=2]
@@ -8,14 +8,15 @@
 [ext_resource path="res://Scenes/Platform.tscn" type="PackedScene" id=6]
 [ext_resource path="res://door.png" type="Texture" id=7]
 [ext_resource path="res://Scripts/Door.gd" type="Script" id=8]
+[ext_resource path="res://font.tres" type="DynamicFont" id=9]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 323.9, 10 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 57, 156.75 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "doorunlocked"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Door:modulate")
@@ -52,7 +53,9 @@ position = Vector2( -1192, 363 )
 [node name="Partner" parent="Player" instance=ExtResource( 2 )]
 position = Vector2( -10.5883, -67.0588 )
 
-[node name="Floor" type="StaticBody2D" parent="." groups=["floor"]]
+[node name="Floor" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
 position = Vector2( -637, 538 )
 scale = Vector2( 5, 5 )
 collision_layer = 3
@@ -60,7 +63,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2( 190.9, -1.12246 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
@@ -68,7 +71,9 @@ position = Vector2( 199.2, 0.600159 )
 scale = Vector2( 0.6768, 0.133 )
 texture = ExtResource( 5 )
 
-[node name="Floor2" type="StaticBody2D" parent="." groups=["floor"]]
+[node name="Floor2" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
 position = Vector2( 1618, 471 )
 rotation = -1.5708
 scale = Vector2( 5, 5 )
@@ -77,7 +82,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
 position = Vector2( 190.9, -1.12246 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor2"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
@@ -85,7 +90,9 @@ position = Vector2( 199.2, 0.600159 )
 scale = Vector2( 0.6768, 0.133 )
 texture = ExtResource( 5 )
 
-[node name="Floor3" type="StaticBody2D" parent="." groups=["floor"]]
+[node name="Floor3" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
 position = Vector2( -1348, -1578 )
 rotation = 1.5708
 scale = Vector2( 5, 5 )
@@ -94,7 +101,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
 position = Vector2( 190.9, -1.12246 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor3"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
@@ -121,12 +128,12 @@ texture = ExtResource( 7 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 visible = false
 position = Vector2( -1212, -495.25 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="Node2D" type="Node2D" parent="Door"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
-anims/doorunlocked = SubResource( 5 )
+anims/doorunlocked = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -137,12 +144,67 @@ limit_bottom = 500
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 position = Vector2( 207, 9 )
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -1284.0
+margin_top = -224.0
+margin_right = -390.0
+margin_bottom = 42.0
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
+bbcode_text = "[center]WASD, SPACE. OR ARROW KEYS TO MOVE"
+text = "WASD, SPACE. OR ARROW KEYS TO MOVE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+margin_left = -331.0
+margin_top = -325.0
+margin_right = 563.0
+margin_bottom = -81.0
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
+bbcode_text = "[center]HOLD E TO CHARGE
+RELEASE TO THROW"
+text = "HOLD E TO CHARGE
+RELEASE TO THROW"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+margin_left = 651.0
+margin_top = -114.0
+margin_right = 1545.0
+margin_bottom = 130.0
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
+bbcode_text = "[center]KILL ALL ENEMIES TO UNLOCK DOOR"
+text = "KILL ALL ENEMIES TO UNLOCK DOOR"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+margin_left = 619.264
+margin_top = -381.994
+margin_right = 1513.26
+margin_bottom = -137.994
+custom_fonts/normal_font = ExtResource( 9 )
+bbcode_enabled = true
+bbcode_text = "[center]YOU CANT LEAVE YOUR BROTHER BEHIND!!!"
+text = "YOU CANT LEAVE YOUR BROTHER BEHIND!!!"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="fliph" from="Player" to="Player/Partner" method="_on_Player_fliph"]
 [connection signal="moving" from="Player" to="Player/Partner" method="_on_Player_moving"]
 [connection signal="stopped" from="Player" to="Player/Partner" method="_on_Player_stopped"]
 [connection signal="throw" from="Player" to="Player/Partner" method="_on_Player_throw"]
 [connection signal="body_entered" from="Player/Partner/Area2D" to="Player" method="_on_Partner_body_entered"]
 [connection signal="body_entered" from="Door" to="Door" method="_on_Door_body_entered"]
-[connection signal="killed" from="Enemy" to="Door" method="_on_Enemy_killed"]
 
 [editable path="Player/Partner"]

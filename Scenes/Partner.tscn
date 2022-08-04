@@ -11,7 +11,7 @@
 [ext_resource path="res://broshoot.png" type="Texture" id=9]
 [ext_resource path="res://brotheridle.png" type="Texture" id=17]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=1]
 radius = 36.2809
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -29,6 +29,11 @@ animations = [ {
 "name": "Shoot",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "Launch",
+"speed": 14.0
+}, {
 "frames": [  ],
 "loop": true,
 "name": "moving",
@@ -38,14 +43,9 @@ animations = [ {
 "loop": true,
 "name": "Land",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": false,
-"name": "Launch",
-"speed": 14.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 128.654, 231 )
 
 [node name="Partner" type="KinematicBody2D" groups=["partner"]]
@@ -63,7 +63,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2( -0.961575, 2.6923 )
@@ -81,29 +81,19 @@ frames = SubResource( 3 )
 animation = "moving"
 playing = true
 
-[node name="Label" type="Label" parent="StateMachine"]
-margin_left = -18.0
-margin_top = 23.0
-margin_right = 21.9999
-margin_bottom = 37.0
-text = "NULL"
-align = 1
-valign = 1
-uppercase = true
-
 [node name="Land" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 6 )
-volume_db = -8.252
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Throw" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 7 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Slingshot" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 5 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="AbilityArea" type="Area2D" parent="."]
@@ -112,7 +102,7 @@ bus = "SFX"
 visible = false
 position = Vector2( -4.00001, -53.6539 )
 rotation = 1.5708
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Range" type="Sprite" parent="AbilityArea"]
 visible = false

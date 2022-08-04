@@ -126,14 +126,14 @@ func _enter_state(new_state, old_state):
 			$AnimatedSprite.play("2Idle")
 		states.idle:
 			$Walk.stop()
-			$Label.text = "Idle"
+
 			if ! parent.connected:
 				$AnimatedSprite.play("Idle")
 			else:
 				$AnimatedSprite.play("2Idle")
 		states.run:
 			$Walk.play()
-			$Label.text = "Run"
+
 			if ! parent.connected:
 				$AnimatedSprite.play("Run")
 			else:
@@ -141,7 +141,7 @@ func _enter_state(new_state, old_state):
 		states.jump:
 			$Walk.stop()
 			$Jump.play()
-			$Label.text = "Jump"
+
 			if ! parent.connected:
 				$AnimatedSprite.play("Jump")
 			else:
@@ -149,10 +149,10 @@ func _enter_state(new_state, old_state):
 		states.dead:
 			$Walk.stop()
 			$Detected.play()
-			$Label.text = "Dead"
+
 		states.fall:
 			$Walk.stop()
-			$Label.text = "Fall"
+
 			if ! parent.connected:
 				$AnimatedSprite.play("Jump")
 			else:
@@ -165,7 +165,7 @@ func _enter_state(new_state, old_state):
 		states.throw:
 			$Walk.stop()
 			$Charge.stop()
-			$Label.text = "Throw"
+
 
 
 func _exit_state(old_state, new_state):

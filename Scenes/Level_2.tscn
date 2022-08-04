@@ -11,13 +11,13 @@
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/AppearingPlat.tscn" type="PackedScene" id=10]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 323.9, 10 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 57, 156.75 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "doorunlocked"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Door:modulate")
@@ -39,17 +39,22 @@ __meta__ = {
 }
 
 [node name="Poster" type="Sprite" parent="."]
-position = Vector2( -597, -181 )
+position = Vector2( 1159, -369 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster4" type="Sprite" parent="."]
+position = Vector2( -1053, -305 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 
 [node name="Poster2" type="Sprite" parent="."]
-position = Vector2( 1292, -396 )
+position = Vector2( -770, 310 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 
 [node name="Poster3" type="Sprite" parent="."]
-position = Vector2( 42.0001, 259 )
+position = Vector2( 1104, 321 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 3 )
 
@@ -59,7 +64,9 @@ position = Vector2( -1103, 345 )
 [node name="Partner" parent="Player" instance=ExtResource( 2 )]
 position = Vector2( -10.5883, -67.0588 )
 
-[node name="Floor" type="StaticBody2D" parent="." groups=["floor"]]
+[node name="Floor" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
 position = Vector2( -637, 538 )
 scale = Vector2( 5, 5 )
 collision_layer = 3
@@ -67,7 +74,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2( 190.9, -1.12246 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
@@ -75,7 +82,9 @@ position = Vector2( 199.2, 0.600159 )
 scale = Vector2( 0.6768, 0.133 )
 texture = ExtResource( 5 )
 
-[node name="Floor2" type="StaticBody2D" parent="." groups=["floor"]]
+[node name="Floor2" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
 position = Vector2( 1618, 471 )
 rotation = -1.5708
 scale = Vector2( 5, 5 )
@@ -84,7 +93,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
 position = Vector2( 190.9, -1.12246 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor2"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
@@ -92,7 +101,9 @@ position = Vector2( 199.2, 0.600159 )
 scale = Vector2( 0.6768, 0.133 )
 texture = ExtResource( 5 )
 
-[node name="Floor3" type="StaticBody2D" parent="." groups=["floor"]]
+[node name="Floor3" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
 position = Vector2( -1348, -1578 )
 rotation = 1.5708
 scale = Vector2( 5, 5 )
@@ -101,7 +112,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
 position = Vector2( 190.9, -1.12246 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor3"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
@@ -112,7 +123,7 @@ texture = ExtResource( 5 )
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="AppearingPlat" parent="Platforms" instance=ExtResource( 10 )]
-position = Vector2( 1825, 252 )
+position = Vector2( 1865, 252 )
 
 [node name="Platform" parent="Platforms/AppearingPlat" index="0"]
 position = Vector2( -335, 0.5 )
@@ -130,7 +141,8 @@ position = Vector2( 2783, -46 )
 [node name="Door" type="Area2D" parent="."]
 position = Vector2( 2602, 214 )
 script = ExtResource( 8 )
-next_scene = "res://Scenes/Level_1.tscn"
+next_scene = "res://Scenes/Level_3.tscn"
+total_enemies = 2
 
 [node name="Door" type="Sprite" parent="Door"]
 modulate = Color( 0.360784, 0.360784, 0.360784, 1 )
@@ -141,12 +153,12 @@ texture = ExtResource( 7 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 visible = false
 position = Vector2( -1212, -495.25 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="Node2D" type="Node2D" parent="Door"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
-anims/doorunlocked = SubResource( 5 )
+anims/doorunlocked = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -161,7 +173,7 @@ position = Vector2( -1168, -111 )
 position = Vector2( -667, -416 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 584, -432 )
+position = Vector2( 591, -426 )
 
 [connection signal="fliph" from="Player" to="Player/Partner" method="_on_Player_fliph"]
 [connection signal="moving" from="Player" to="Player/Partner" method="_on_Player_moving"]
@@ -170,8 +182,6 @@ position = Vector2( 584, -432 )
 [connection signal="body_entered" from="Player/Partner/Area2D" to="Player" method="_on_Partner_body_entered"]
 [connection signal="body_entered" from="Door" to="Door" method="_on_Door_body_entered"]
 [connection signal="buttonpressed" from="Button" to="Platforms/AppearingPlat" method="_on_Button_buttonpressed"]
-[connection signal="killed" from="Enemy" to="Door" method="_on_Enemy_killed"]
-[connection signal="killed" from="Enemy2" to="Door" method="_on_Enemy_killed"]
 
 [editable path="Player/Partner"]
 [editable path="Platforms/AppearingPlat"]

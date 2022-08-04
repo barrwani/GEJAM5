@@ -6,10 +6,10 @@
 [ext_resource path="res://SFX/Drone.wav" type="AudioStream" id=4]
 [ext_resource path="res://botbroke.png" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 18, 15.5 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
@@ -22,10 +22,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 25.02
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "New Anim"
 length = 0.3
 tracks/0/type = "value"
@@ -53,7 +53,7 @@ tracks/1/keys = {
 "values": [ Vector2( -11, 11 ), Vector2( 33.5714, 11.4286 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Area2D:position")
@@ -75,7 +75,7 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 8, 5.5 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -11, 11 )
@@ -92,13 +92,13 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 10, 6 )
 scale = Vector2( 0.11, 0.11 )
-frames = SubResource( 3 )
+frames = SubResource( 2 )
 
 [node name="Proximity" type="Area2D" parent="."]
 position = Vector2( 8, 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Proximity"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2( 88.3333, 20 )
@@ -107,8 +107,8 @@ cast_to = Vector2( 0, 80 )
 collision_mask = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/New Anim" = SubResource( 5 )
-anims/RESET = SubResource( 6 )
+"anims/New Anim" = SubResource( 4 )
+anims/RESET = SubResource( 5 )
 
 [node name="deathtimer" type="Timer" parent="."]
 wait_time = 0.7
@@ -116,7 +116,7 @@ one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
-volume_db = -10.0
+volume_db = -5.0
 autoplay = true
 bus = "SFX"
 

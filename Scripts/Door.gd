@@ -16,7 +16,7 @@ func _process(delta):
 
 func _on_Door_body_entered(body):
 	if body.is_in_group("player") && body.connected && killed_enemies == total_enemies:
-		pass
+		SceneChanger.change_scene(next_scene)
 
 func _on_Enemy_killed():
 	killed_enemies +=1

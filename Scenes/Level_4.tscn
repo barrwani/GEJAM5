@@ -1,0 +1,273 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Scripts/Door.gd" type="Script" id=1]
+[ext_resource path="res://door.png" type="Texture" id=2]
+[ext_resource path="res://poster.png" type="Texture" id=3]
+[ext_resource path="res://platform.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Platform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/AppearingPlat.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Partner.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Button.tscn" type="PackedScene" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 323.9, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 57, 156.75 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "doorunlocked"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Door:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.360784, 0.360784, 0.360784, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="World" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [ -1318.0 ]
+}
+
+[node name="Poster" type="Sprite" parent="."]
+position = Vector2( -993, -331 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster4" type="Sprite" parent="."]
+position = Vector2( 1193, -341 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster5" type="Sprite" parent="."]
+position = Vector2( 1203, 251 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster11" type="Sprite" parent="."]
+position = Vector2( -659, 261 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster6" type="Sprite" parent="."]
+position = Vector2( -673, 262 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster10" type="Sprite" parent="."]
+position = Vector2( -684, 263 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster8" type="Sprite" parent="."]
+position = Vector2( -684, 263 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster9" type="Sprite" parent="."]
+position = Vector2( -684, 263 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster7" type="Sprite" parent="."]
+position = Vector2( -693, 265 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster12" type="Sprite" parent="."]
+position = Vector2( 871, 261 )
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster13" type="Sprite" parent="."]
+position = Vector2( 857, 262 )
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster14" type="Sprite" parent="."]
+position = Vector2( 846, 263 )
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster15" type="Sprite" parent="."]
+position = Vector2( 846, 263 )
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster16" type="Sprite" parent="."]
+position = Vector2( 846, 263 )
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster17" type="Sprite" parent="."]
+position = Vector2( 837, 265 )
+rotation = 3.14159
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster2" type="Sprite" parent="."]
+position = Vector2( 302, -512 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Poster3" type="Sprite" parent="."]
+position = Vector2( -75.9999, -525 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
+position = Vector2( -1103, 345 )
+
+[node name="Partner" parent="Player" instance=ExtResource( 9 )]
+position = Vector2( -10.5883, -67.0588 )
+
+[node name="Floor" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+position = Vector2( -637, 538 )
+scale = Vector2( 5, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2( 190.9, -1.12246 )
+shape = SubResource( 1 )
+
+[node name="Platform2" type="Sprite" parent="Floor"]
+modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
+position = Vector2( 199.2, 0.600159 )
+scale = Vector2( 0.6768, 0.133 )
+texture = ExtResource( 4 )
+
+[node name="Floor2" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+position = Vector2( 1618, 471 )
+rotation = -1.5708
+scale = Vector2( 5, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+position = Vector2( 190.9, -1.12246 )
+shape = SubResource( 1 )
+
+[node name="Platform2" type="Sprite" parent="Floor2"]
+modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
+position = Vector2( 199.2, 0.600159 )
+scale = Vector2( 0.6768, 0.133 )
+texture = ExtResource( 4 )
+
+[node name="Floor3" type="StaticBody2D" parent="." groups=[
+"floor",
+]]
+position = Vector2( -1348, -1578 )
+rotation = 1.5708
+scale = Vector2( 5, 5 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
+position = Vector2( 190.9, -1.12246 )
+shape = SubResource( 1 )
+
+[node name="Platform2" type="Sprite" parent="Floor3"]
+modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
+position = Vector2( 199.2, 0.600159 )
+scale = Vector2( 0.6768, 0.133 )
+texture = ExtResource( 4 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="AppearingPlat" parent="Platforms" instance=ExtResource( 8 )]
+position = Vector2( 1884.33, 241.405 )
+
+[node name="Platform" parent="Platforms/AppearingPlat" index="0"]
+position = Vector2( -335, 0.5 )
+scale = Vector2( 0.1516, 0.133 )
+
+[node name="CollisionShape2D" parent="Platforms/AppearingPlat" index="1"]
+position = Vector2( -338.1, -1.12247 )
+
+[node name="AppearingPlat2" parent="Platforms" instance=ExtResource( 8 )]
+position = Vector2( 1802.32, -246.929 )
+
+[node name="Platform" parent="Platforms/AppearingPlat2" index="0"]
+position = Vector2( -335, 0.5 )
+scale = Vector2( 0.1516, 0.133 )
+
+[node name="CollisionShape2D" parent="Platforms/AppearingPlat2" index="1"]
+position = Vector2( -338.1, -1.12247 )
+
+[node name="Platform2" parent="Platforms" instance=ExtResource( 6 )]
+position = Vector2( 972, -32.9999 )
+
+[node name="Platform3" parent="Platforms" instance=ExtResource( 6 )]
+position = Vector2( 2783, -46 )
+
+[node name="Door" type="Area2D" parent="."]
+position = Vector2( 1323.72, 17.8085 )
+script = ExtResource( 1 )
+next_scene = "res://Scenes/Level_5.tscn"
+total_enemies = 2
+
+[node name="Door" type="Sprite" parent="Door"]
+modulate = Color( 0.360784, 0.360784, 0.360784, 1 )
+position = Vector2( -1211, -479 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+visible = false
+position = Vector2( -1212, -495.25 )
+shape = SubResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="Door"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
+anims/doorunlocked = SubResource( 3 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 1.5, 1.1 )
+limit_left = -1320
+limit_bottom = 500
+
+[node name="Button" parent="." instance=ExtResource( 10 )]
+position = Vector2( -1168, -111 )
+
+[node name="Button2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1372, -136.198 )
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( -667, -416 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 584, -425.643 )
+
+[connection signal="fliph" from="Player" to="Player/Partner" method="_on_Player_fliph"]
+[connection signal="moving" from="Player" to="Player/Partner" method="_on_Player_moving"]
+[connection signal="stopped" from="Player" to="Player/Partner" method="_on_Player_stopped"]
+[connection signal="throw" from="Player" to="Player/Partner" method="_on_Player_throw"]
+[connection signal="body_entered" from="Player/Partner/Area2D" to="Player" method="_on_Partner_body_entered"]
+[connection signal="body_entered" from="Door" to="Door" method="_on_Door_body_entered"]
+[connection signal="buttonpressed" from="Button" to="Platforms/AppearingPlat" method="_on_Button_buttonpressed"]
+[connection signal="buttonpressed" from="Button2" to="Platforms/AppearingPlat2" method="_on_Button_buttonpressed"]
+
+[editable path="Player/Partner"]
+[editable path="Platforms/AppearingPlat"]
+[editable path="Platforms/AppearingPlat2"]

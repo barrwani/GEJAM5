@@ -45,14 +45,10 @@ func _enter_state(new_state, old_state):
 		states.independent:
 			$Throw.stop()
 			$AnimatedSprite.play("Land")
-			$Label.text = "Independent"
-		states.attached:
-			$Label.text = "Attached"
 		states.firing:
 			$AnimatedSprite.play("Shoot")
 			$Slingshot.play()
-			$Label.text = "firing"
 		states.in_air:
 			$Throw.play()
 			$AnimatedSprite.play("Launch")
-			$Label.text = "thrown"
+

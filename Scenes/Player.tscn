@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scripts/PlayerFSM.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -22,15 +22,44 @@
 [ext_resource path="res://spin2.png" type="Texture" id=20]
 [ext_resource path="res://spin0.png" type="Texture" id=21]
 [ext_resource path="res://2idle.png" type="Texture" id=22]
+[ext_resource path="res://sisterrun0.png" type="Texture" id=23]
+[ext_resource path="res://sisterrun1.png" type="Texture" id=24]
+[ext_resource path="res://sisterwalk2.png" type="Texture" id=25]
+[ext_resource path="res://sisterrun4.png" type="Texture" id=26]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26.1765, 68.5294 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
+"loop": true,
+"name": "Run",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 9 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "2Run",
+"speed": 6.0
+}, {
 "frames": [ ExtResource( 19 ) ],
 "loop": true,
 "name": "2Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "2Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "2Jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 18 ) ],
@@ -41,26 +70,6 @@ animations = [ {
 "frames": [ ExtResource( 21 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Charge",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": false,
-"name": "2Jump",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 9 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "2Run",
-"speed": 6.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "2Idle",
 "speed": 5.0
 } ]
 
@@ -74,8 +83,7 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -8.52941, -9.70588 )
-scale = Vector2( 1, 1 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -84,17 +92,7 @@ script = ExtResource( 1 )
 position = Vector2( -7.64706, -21.1765 )
 scale = Vector2( 0.11, 0.1 )
 frames = SubResource( 2 )
-animation = "Idle"
-
-[node name="Label" type="Label" parent="StateMachine"]
-margin_left = -22.3636
-margin_top = -44.7272
-margin_right = 17.6364
-margin_bottom = -30.7272
-text = "NULL"
-align = 1
-valign = 1
-uppercase = true
+animation = "2Idle"
 
 [node name="Timer" type="Timer" parent="StateMachine"]
 wait_time = 0.2
@@ -102,37 +100,37 @@ one_shot = true
 
 [node name="Jump" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 7 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Charge" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 12 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Land" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 8 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Throw" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 11 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Attached" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 13 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Detected" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 14 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="Walk" type="AudioStreamPlayer" parent="StateMachine"]
 stream = ExtResource( 10 )
-volume_db = -10.0
+volume_db = -5.0
 bus = "SFX"
 
 [node name="throwtimer" type="Timer" parent="."]
