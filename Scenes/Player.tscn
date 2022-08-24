@@ -2,51 +2,36 @@
 
 [ext_resource path="res://Scripts/PlayerFSM.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://2jump.png" type="Texture" id=3]
-[ext_resource path="res://sisteridle.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/2jump.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/sisteridle.png" type="Texture" id=4]
 [ext_resource path="res://background.png" type="Texture" id=5]
-[ext_resource path="res://range.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/range.png" type="Texture" id=6]
 [ext_resource path="res://SFX/Jump.wav" type="AudioStream" id=7]
 [ext_resource path="res://SFX/Land.wav" type="AudioStream" id=8]
-[ext_resource path="res://2run1.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/2run1.png" type="Texture" id=9]
 [ext_resource path="res://SFX/Walk.wav" type="AudioStream" id=10]
 [ext_resource path="res://SFX/Throw.wav" type="AudioStream" id=11]
 [ext_resource path="res://SFX/Charge.wav" type="AudioStream" id=12]
 [ext_resource path="res://SFX/Attached.wav" type="AudioStream" id=13]
 [ext_resource path="res://SFX/Detected.wav" type="AudioStream" id=14]
-[ext_resource path="res://2run0.png" type="Texture" id=15]
-[ext_resource path="res://2run2.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/2run0.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/2run2.png" type="Texture" id=16]
 [ext_resource path="res://Scripts/Trajectory.gd" type="Script" id=17]
-[ext_resource path="res://sisterjump.png" type="Texture" id=18]
-[ext_resource path="res://2fall.png" type="Texture" id=19]
-[ext_resource path="res://spin2.png" type="Texture" id=20]
-[ext_resource path="res://spin0.png" type="Texture" id=21]
-[ext_resource path="res://2idle.png" type="Texture" id=22]
-[ext_resource path="res://sisterrun0.png" type="Texture" id=23]
-[ext_resource path="res://sisterrun1.png" type="Texture" id=24]
-[ext_resource path="res://sisterwalk2.png" type="Texture" id=25]
-[ext_resource path="res://sisterrun4.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/sisterjump.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/2fall.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/spin2.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/spin0.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/2idle.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/sisterrun0.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/sisterrun1.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/sisterwalk2.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/sisterrun4.png" type="Texture" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26.1765, 68.5294 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
-"loop": true,
-"name": "Run",
-"speed": 7.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 9 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "2Run",
-"speed": 6.0
-}, {
 "frames": [ ExtResource( 19 ) ],
 "loop": true,
 "name": "2Fall",
@@ -62,15 +47,30 @@ animations = [ {
 "name": "2Jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 18 ) ],
+"frames": [ ExtResource( 15 ), ExtResource( 9 ), ExtResource( 16 ) ],
 "loop": true,
-"name": "Jump",
-"speed": 5.0
+"name": "2Run",
+"speed": 6.0
 }, {
 "frames": [ ExtResource( 21 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "Charge",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
+"loop": true,
+"name": "Run",
+"speed": 7.0
 } ]
 
 [sub_resource type="Gradient" id=3]
@@ -89,10 +89,10 @@ shape = SubResource( 1 )
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="StateMachine"]
-position = Vector2( -7.64706, -21.1765 )
-scale = Vector2( 0.11, 0.1 )
+position = Vector2( 14.1176, -52.9412 )
+scale = Vector2( 0.15, 0.14 )
 frames = SubResource( 2 )
-animation = "2Idle"
+animation = "2Jump"
 
 [node name="Timer" type="Timer" parent="StateMachine"]
 wait_time = 0.2

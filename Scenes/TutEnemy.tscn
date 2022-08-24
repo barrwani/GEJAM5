@@ -1,9 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://bot.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/bot.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/TutEnemy.gd" type="Script" id=2]
 [ext_resource path="res://SFX/Drone.wav" type="AudioStream" id=4]
-[ext_resource path="res://botbroke.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/botbroke.png" type="Texture" id=5]
+
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 18, 15.5 )

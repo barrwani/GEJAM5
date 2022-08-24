@@ -5,3 +5,14 @@ func _on_Play_pressed():
 
 func _on_Exit_pressed():
 	get_tree().quit()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "auto":
+		$MenuOST.play()
+
+func _process(delta):
+	if $Play.is_hovered() || $Settings.is_hovered() || $Exit.is_hovered():
+		$Panel.visible = true
+	else:
+		$Panel.visible = false
