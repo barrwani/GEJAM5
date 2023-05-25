@@ -16,3 +16,8 @@ func _process(delta):
 		$Panel.visible = true
 	else:
 		$Panel.visible = false
+
+
+func _ready():
+	Ost.stop()
+	Engine.set_target_fps(60)

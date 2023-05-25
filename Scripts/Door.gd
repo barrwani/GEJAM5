@@ -5,12 +5,14 @@ export var total_enemies = 1
 var killed_enemies = 0
 var just_turned = false
 
+func _ready():
+	$AnimatedSprite.play("default")
 
 
 func _process(delta):
 	if killed_enemies == total_enemies:
 		if !just_turned:
-			$AnimationPlayer.play("doorunlocked")
+			$AnimatedSprite.play("opening")
 			#$SFX.play()
 			just_turned = true
 

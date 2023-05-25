@@ -16,13 +16,14 @@ var charge = false
 var linebreak = false
 var move_input
 var was_on_floor
+
 var holding = false
 var waspicked
 var throwspeed = 300
 var justpicked = false
 var throwing = false
 onready var line = $Line2D
-var max_points = 50
+var max_points = 9
 
 
 onready var animatedsprite = $StateMachine/AnimatedSprite
@@ -44,20 +45,20 @@ func update_trajectory(delta):
 	line.clear_points()
 	line.activate()
 	var pos = $Position2D.position
-	var vel = Vector2(throwspeed, -400 - throwspeed)
+	var vel = Vector2(throwspeed/ 10, -50- throwspeed/10)
 	if animatedsprite.flip_h:
 		vel.x *= -1
 	for i in max_points:
 		line.add_point(pos)
-		vel.y += (3100 * delta) 
-		pos += vel * delta
+		vel.y += (31) 
+		pos += vel
 		if linebreak:
 			linebreak = false
 			break
 	$Range.set_deferred("visible", true)
 	$Range.position.x = pos.x
 	$Range.position.y = pos.y -100
-		
+
 
 func throw():
 	$Range.set_deferred("visible", false)
@@ -101,6 +102,8 @@ func _handle_move_input():
 		else:
 			emit_signal("stopped")
 			velocity.x = 0
+				
+	
 
 
 func death():
@@ -126,3 +129,6 @@ func _on_pickuptimer_timeout():
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("platform") || body.is_in_group("floor"):
 		linebreak = true
+
+
+

@@ -30,6 +30,7 @@ func _physics_process(delta):
 func attacked():
 	dead = true
 	movespeed = 0
+	$CollisionShape2D.set_deferred("disabled", true)
 	$AudioStreamPlayer2D.stop()
 	$Area2D.queue_free()
 	self.connect("killed", get_node("/root/World/Door"), "_on_Enemy_killed")

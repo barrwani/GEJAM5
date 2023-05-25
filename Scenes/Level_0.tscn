@@ -1,51 +1,26 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Partner.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Environment/poster.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/TutEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Environment/platform.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Platform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Environment/door.png" type="Texture" id=7]
-[ext_resource path="res://Scripts/Door.gd" type="Script" id=8]
 [ext_resource path="res://font.tres" type="DynamicFont" id=9]
+[ext_resource path="res://Scripts/Level_0.gd" type="Script" id=10]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 323.9, 9.03877 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 323.9, 10 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 57, 156.75 )
-
-[sub_resource type="Animation" id=3]
-resource_name = "doorunlocked"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Door:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.360784, 0.360784, 0.360784, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-
 [node name="World" type="Node2D"]
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
 "_edit_vertical_guides_": [ -1318.0 ]
 }
-
-[node name="Poster" type="Sprite" parent="."]
-position = Vector2( 5.99998, 98.0001 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
-
-[node name="Poster2" type="Sprite" parent="."]
-position = Vector2( 1401, 324 )
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -1192, 363 )
@@ -60,13 +35,13 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2( 190.9, -1.12246 )
-shape = SubResource( 1 )
+position = Vector2( 190.9, -0.161224 )
+shape = SubResource( 5 )
 
 [node name="Platform2" type="Sprite" parent="Floor"]
-modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
-position = Vector2( 199.2, 0.600159 )
-scale = Vector2( 0.6768, 0.133 )
+modulate = Color( 0.552941, 0.552941, 0.552941, 1 )
+position = Vector2( 199.2, 36.3923 )
+scale = Vector2( 0.6768, 0.108256 )
 texture = ExtResource( 5 )
 
 [node name="Floor2" type="StaticBody2D" parent="." groups=["floor"]]
@@ -82,8 +57,8 @@ shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor2"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
-position = Vector2( 199.2, 0.600159 )
-scale = Vector2( 0.6768, 0.133 )
+position = Vector2( 199.2, 35.6969 )
+scale = Vector2( 0.6768, 0.108737 )
 texture = ExtResource( 5 )
 
 [node name="Floor3" type="StaticBody2D" parent="." groups=["floor"]]
@@ -99,41 +74,14 @@ shape = SubResource( 1 )
 
 [node name="Platform2" type="Sprite" parent="Floor3"]
 modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
-position = Vector2( 199.2, 0.600159 )
-scale = Vector2( 0.6768, 0.133 )
+position = Vector2( 199.2, 34.995 )
+scale = Vector2( 0.6768, 0.109222 )
 texture = ExtResource( 5 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="Platform" parent="Platforms" instance=ExtResource( 6 )]
 position = Vector2( 1791, 308 )
-
-[node name="Door" type="Area2D" parent="."]
-position = Vector2( 2430, 807 )
-script = ExtResource( 8 )
-next_scene = "res://Scenes/Level_1.tscn"
-
-[node name="Door" type="Sprite" parent="Door"]
-modulate = Color( 0.360784, 0.360784, 0.360784, 1 )
-position = Vector2( -1211, -479 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 7 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-visible = false
-position = Vector2( -1212, -495.25 )
-shape = SubResource( 2 )
-
-[node name="Node2D" type="Node2D" parent="Door"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
-anims/doorunlocked = SubResource( 3 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 1.5, 1.1 )
-limit_left = -1320
-limit_bottom = 500
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
 position = Vector2( 207, 9 )
@@ -147,9 +95,6 @@ custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]WASD, SPACE. OR ARROW KEYS TO MOVE"
 text = "WASD, SPACE. OR ARROW KEYS TO MOVE"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
 margin_left = -331.0
@@ -162,23 +107,6 @@ bbcode_text = "[center]HOLD E TO CHARGE
 RELEASE TO THROW"
 text = "HOLD E TO CHARGE
 RELEASE TO THROW"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="."]
-margin_left = 651.0
-margin_top = -114.0
-margin_right = 1545.0
-margin_bottom = 130.0
-custom_fonts/normal_font = ExtResource( 9 )
-bbcode_enabled = true
-bbcode_text = "[center]KILL ALL ENEMIES TO UNLOCK DOOR"
-text = "KILL ALL ENEMIES TO UNLOCK DOOR"
-scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="."]
 margin_left = 619.264
@@ -194,11 +122,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( -54, -27 )
+current = true
+zoom = Vector2( 1.5, 1.35 )
+limit_left = -1320
+limit_top = -1200
+limit_bottom = 550
+editor_draw_limits = true
+
+[node name="Door" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2550, 804 )
+
 [connection signal="fliph" from="Player" to="Player/Partner" method="_on_Player_fliph"]
 [connection signal="moving" from="Player" to="Player/Partner" method="_on_Player_moving"]
 [connection signal="stopped" from="Player" to="Player/Partner" method="_on_Player_stopped"]
 [connection signal="throw" from="Player" to="Player/Partner" method="_on_Player_throw"]
 [connection signal="body_entered" from="Player/Partner/Area2D" to="Player" method="_on_Partner_body_entered"]
-[connection signal="body_entered" from="Door" to="Door" method="_on_Door_body_entered"]
+[connection signal="killed" from="Enemy" to="Door" method="_on_Enemy_killed"]
 
 [editable path="Player/Partner"]

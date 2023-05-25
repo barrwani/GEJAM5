@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Door.gd" type="Script" id=1]
+[ext_resource path="res://Environment/doorpening.png" type="Texture" id=2]
+[ext_resource path="res://Environment/dooropen.png" type="Texture" id=3]
+[ext_resource path="res://Environment/door.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 102.5, 197 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "opening",
+"speed": 5.0
+} ]
+
+[node name="Door" type="Area2D"]
+script = ExtResource( 1 )
+next_scene = "res://Scenes/Menu.tscn"
+total_enemies = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.5, -10 )
+shape = SubResource( 6 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 20, 13 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 4 )
+
+[connection signal="body_entered" from="." to="." method="_on_Door_body_entered"]

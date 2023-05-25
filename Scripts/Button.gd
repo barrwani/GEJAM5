@@ -17,9 +17,13 @@ func press():
 		$ButtonActivated.set_deferred("visible", true)
 		$ButtonColor.set_deferred("visible", false)
 		emit_signal("buttonpressed")
+	else:
+		unpress()
+		
 
 func unpress():
-	if pressed:
-		pressed = false
-		$ButtonActivated.set_deferred("visible", false)
-		$ButtonColor.set_deferred("visible", true)
+	pressed = false
+	$ButtonActivated.set_deferred("visible", false)
+	$ButtonColor.set_deferred("visible", true)
+	$AudioStreamPlayer.play()
+	emit_signal("unpress")

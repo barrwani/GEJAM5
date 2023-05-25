@@ -173,7 +173,7 @@ func _exit_state(old_state, new_state):
 
 func _process(delta):
 	if add && parent.throwspeed <900:
-		parent.throwspeed += 15
+		parent.throwspeed += 1500 * delta
 
 
 
