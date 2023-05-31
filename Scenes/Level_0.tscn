@@ -132,7 +132,7 @@ limit_bottom = 550
 editor_draw_limits = true
 
 [node name="Door" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2550, 804 )
+position = Vector2( 1285, 302 )
 
 [connection signal="fliph" from="Player" to="Player/Partner" method="_on_Player_fliph"]
 [connection signal="moving" from="Player" to="Player/Partner" method="_on_Player_moving"]
